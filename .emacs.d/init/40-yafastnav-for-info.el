@@ -1,0 +1,1 @@
+(require 'yafastnav-for-info)

@@ -1,0 +1,64 @@
+;; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
+
+(autoload 'sdic-describe-word "sdic" "英単語の意味を調べる" t nil)
+(global-set-key "\C-cW" 'sdic-describe-word)
+(autoload 'sdic-describe-word-at-point "sdic" "カーソルの位置の英単語の意味を調べる" t nil)
+(global-set-key "\C-cW" 'sdic-describe-word-at-point)
+
+(setq sdic-eiwa-dictionary-list
+      '((sdicf-client "~/Dropbox/data/eijiro/eijirou.sdic")))
+(setq sdic-waei-dictionary-list
+      '((sdicf-client "~/Dropbox/data/eijiro/waeijirou.sdic")))
+(setq sdic-default-coding-system 'utf-8-unix)
+;(sdic-describe-word "acti")
+
+
+(require 'sdic)
+(defadvice sdic-display-buffer (around my-sdic-display-buffer activate)
+;; (defun sdic-display-buffer (&optional start-point)
+  ;; "検索結果表示バッファを表示する関数"
+  (unwind-protect
+    (let ((buf (set-buffer sdic-buffer-name))
+          (p (or start-point (point))))
+      (switch-to-buffer buf)
+      (if (and sdic-warning-hidden-entry
+               (> p (point-min)))
+          (message "この前にもエントリがあります。"))
+      (goto-char p))))
+
+; 検索結果表示バッファで引いた単語をハイライト表示する
+(defadvice sdic-search-eiwa-dictionary (after highlight-phrase (arg))
+    (highlight-phrase arg "hi-yellow"))
+(defadvice sdic-search-waei-dictionary (after highlight-phrase (arg))
+    (highlight-phrase arg "hi-yellow"))
+
+(ad-activate 'sdic-search-eiwa-dictionary)
+(ad-activate 'sdic-search-waei-dictionary)
+
+
+;; http://kurohuku.blogspot.jp/2009_10_01_archive.html
+;; (anything (list anything-for-sdic) nil nil nil nil "*foo*")
+
+;; (defvar hogefuga nil)
+;; (defvar anything-for-sdic
+;;   `((name . "sdic")
+;;     (init . (lambda () nil))
+;;     (candidates . (lambda ()
+;; 		    (let ((result
+;;                            ;;emacs lispはダイナミックスコープ
+;; 			   (flet ((message (n) n)
+;; 				  (sdic-display-buffer (x) x))
+;; 			     (sdic-describe-word anything-pattern))))
+;; 		      (push result hogefuga)
+;; 		      (prog1
+;; 			  (if result
+;; 			      (prog1
+;; 				  (with-current-buffer "*sdic*"
+;; 				    (split-string (buffer-string) "\n" t))
+;; 				(sdic-display-buffer result))
+;; 			    (sdic-exit)
+;; 			    nil)
+;; 			(set-buffer "*anything*")))))
+;;     (requires-pattern . 3)
+;;     (volatile)))
+

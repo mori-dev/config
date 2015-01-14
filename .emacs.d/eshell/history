@@ -1,0 +1,80 @@
+mkdir processes
+cd ..
+mkdir progresses
+cd ..
+mkdir ramp_coordinations
+mkdir api
+mkdir api
+mkdir issue_comments
+mkdir nokogiri
+cp fids_sample.xml fids_sample2.xml
+mkdir common
+mkdir common
+mkdir mobile
+u
+mkdir mobile
+mkdir board_topics
+mkdir flights
+mkdir memos
+mkdir list
+cd ..
+rm -rf aspell
+ls
+touch common/.gitkeep
+mkdir list
+tree .
+│   └── side
+ls
+mkdir flights
+cp flight_list_item.hbs ./flights/
+cd ../../
+cd ../
+mkdir favorite_airport_codes
+mkdir errors
+mkdir errors
+mkdir profiles
+mkdir features
+mkdir board_topics
+mkdir board_comments
+mkdir board_comments
+mkdir images
+cp /home/m/Pictures/shutter/sample.png ./
+cp /home/m/Pictures/sample.png ./
+ls
+mkdir my
+mkdir filter
+mkdir view
+ls
+mv view views
+mkdir views
+ls
+mv chat messages
+ls
+rm -rf chat
+ls
+cd ..
+cd ..
+rm -rf migemo
+ls
+cd ..
+rm -rf bin
+cd ..
+rm -rf expand-region
+cd ..
+rm -rf emacs-dayone.bk
+ls
+rm -rf cucumber
+rm dispicon.el
+rm -rf gca-20060903
+rm ghc-mod
+rm -rf ghc-mod
+ls
+cd ..
+ls
+cd ..
+ls
+cd .
+cd ..
+rm -rf lib
+cd ..
+rm -rf info

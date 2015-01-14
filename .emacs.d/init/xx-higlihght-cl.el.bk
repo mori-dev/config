@@ -1,0 +1,8 @@
+;; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
+
+
+;highlight-cl.elは、batch-byte-compile でバイトコンパイル
+(require 'highlight-cl)
+(add-hook 'emacs-lisp-mode-hook 'highlight-cl-add-font-lock-keywords)
+(add-hook 'lisp-interaction-mode-hook 'highlight-cl-add-font-lock-keywords)
+

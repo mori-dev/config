@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN' 'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>
+<plist version='1.0'>
+<dict>
+         <key>Creation Date</key>
+         <date>2013-11-16T13:55:05Z</date>
+         <key>Creator</key>
+         <dict>
+                <key>Device Agent</key>
+                <string>Emacs</string>
+                <key>Generation Date</key>
+                <date>2013-11-16T13:55:05Z</date>
+                <key>Host Name</key>
+                <string>Emacs</string>
+                <key>OS Agent</key>
+                <string>Ubuntu</string>
+                <key>Software Agent</key>
+                <string></string>
+        </dict>
+        <key>Entry Text</key>
+        <string>;; (require &#39;dayone)</string>
+        <key>Starred</key>
+        <false/>
+        <key>Tags</key>
+        <array>
+            <string>from-emacs</string>
+
+        </array>
+        <key>Time Zone</key>
+        <string>Asia/Tokyo</string>
+        <key>UUID</key>
+        <string>cea463f7-ce6e-24f4-fee3-94dd1b114e97</string>
+</dict>
+</plist>

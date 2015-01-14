@@ -1,0 +1,4 @@
+/etc/hosts
+/etc/#hosts#
+/etc/apache2/sites-available/my_site
+/etc/apache2/sites-available/#my_site#
