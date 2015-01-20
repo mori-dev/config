@@ -10,7 +10,7 @@
 ;; This file is NOT part of GNU Emacs.
 ;;
 ;; Install
-;;     Please see the README.asciidoc file from the same distribution
+;;     Please see the README.md file from the same distribution
 
 ;;
 ;; package status --- a plist saved on a file, using symbols
@@ -22,6 +22,10 @@
 (require 'cl)
 (require 'pp)
 (require 'el-get-core)
+
+(declare-function el-get-install "el-get" (package))
+(declare-function el-get-package-is-installed "el-get" (package))
+(declare-function el-get-print-package "el-get-list-packages" (package-name status &optional desc))
 
 (defun el-get-package-name (package-symbol)
   "Returns a package name as a string."
@@ -48,6 +52,10 @@
       package-name
     (intern (format ":%s" package-name))))
 
+(defvar el-get-status-cache nil
+  "Cache used by `el-get-read-status-file'.")
+
+(defvar el-get-package-menu-buffer) ; from el-get-list-packages.el
 (defun el-get-save-package-status (package status &optional recipe)
   "Save given package status"
   (let* ((package (el-get-as-symbol package))
@@ -58,18 +66,36 @@
          (package-status-alist
           (assq-delete-all package (el-get-read-status-file)))
          (new-package-status-alist
-          (sort (append package-status-alist
-                        (list            ; alist of (PACKAGE . PROPERTIES-LIST)
-                         (cons package (list 'status status 'recipe recipe))))
-                (lambda (p1 p2)
-                  (string< (el-get-as-string (car p1))
-                           (el-get-as-string (car p2)))))))
+          (sort
+           ;; Do not save package information if status is removed.
+           (if (string= status "removed")
+               package-status-alist
+             (append package-status-alist
+                     (list  ; alist of (PACKAGE . PROPERTIES-LIST)
+                      (cons package (list 'status status 'recipe recipe)))))
+           (lambda (p1 p2)
+             (string< (el-get-as-string (car p1))
+                      (el-get-as-string (car p2)))))))
     (assert (listp recipe) nil
             "Recipe must be a list")
     (with-temp-file el-get-status-file
       (insert (el-get-print-to-string new-package-status-alist 'pretty)))
     ;; Update cache
     (setq el-get-status-cache new-package-status-alist)
+    ;; Update package menu, if it exists
+    (save-excursion
+      (when (and (bound-and-true-p el-get-package-menu-buffer)
+                 (buffer-live-p el-get-package-menu-buffer)
+                 (set-buffer el-get-package-menu-buffer)
+                 (eq major-mode 'el-get-package-menu-mode))
+        (goto-char (point-min))
+        (let ((inhibit-read-only t)
+              (name (el-get-package-name package)))
+          (when (re-search-forward
+                 (format "^..%s[[:blank:]]+[^[:blank:]]+[[:blank:]]+"
+                         (regexp-quote name)) nil t)
+            (delete-region (match-beginning 0) (match-end 0))
+            (el-get-print-package name status)))))
     ;; Return the new alist
     new-package-status-alist))
 
@@ -77,9 +103,9 @@
   "Convert OLD-STATUS-LIST, a property list, to the new format"
   ;; first backup the old status just in case
   (with-temp-file (format "%s.old" el-get-status-file)
-    (insert (el-get-print-to-string ps)))
+    (insert (el-get-print-to-string old-status-list)))
   ;; now convert to the new format, fetching recipes as we go
-  (loop for (p s) on ps by 'cddr
+  (loop for (p s) on old-status-list by 'cddr
         for psym = (el-get-package-symbol p)
         when psym
         collect
@@ -92,8 +118,9 @@
                                 ;; just provide a placeholder no-op recipe.
                                 (error `(:name ,psym :type builtin))))))))
 
-(defvar el-get-status-cache nil
-  "Cache used by `el-get-read-status-file'.")
+(defun el-get-clear-status-cache ()
+  "Clear in-memory cache for status file."
+  (setq el-get-status-cache nil))
 
 (defun el-get-read-status-file ()
   "read `el-get-status-file' and return an alist of plist like:
@@ -104,14 +131,21 @@
 (defun el-get-read-status-file-force ()
   "Forcefully load status file."
   (let* ((ps
-          (when (file-exists-p el-get-status-file)
-            (car (with-temp-buffer
-                   (insert-file-contents-literally el-get-status-file)
-                   (read-from-string (buffer-string))))))
+          (if (file-exists-p el-get-status-file)
+              (car (with-temp-buffer
+                     (insert-file-contents-literally el-get-status-file)
+                     (read-from-string (buffer-string))))
+            ;; If it doesn't exist, make sure the directory is there
+            ;; so we can create it.
+            (make-directory el-get-dir t)))
          (p-s
-          (if (consp (car ps))         ; check for an alist, new format
-              ps
-            (el-get-convert-from-old-status-format ps))))
+          (cond
+           ((null ps) ;; nothing installed, we should install el-get
+            (list (list 'el-get 'status "required")))
+           ;; ps is an alist, no conversion needed
+           ((consp (car ps)) ps)
+           ;; looks like we might have an old format status list
+           (t (el-get-convert-from-old-status-format ps)))))
     ;; double check some status "conditions"
     ;;
     ;; a package with status "installed" and a missing directory is
@@ -152,7 +186,7 @@
   "Return package names that are currently in given status"
   (loop for (p . prop) in package-status-alist
         for s = (plist-get prop 'status)
-	when (member s statuses)
+        when (member s statuses)
         collect (el-get-as-string p)))
 
 (defun el-get-list-package-names-with-status (&rest statuses)
@@ -179,10 +213,10 @@
 (defun el-get-extra-packages (&rest packages)
   "Return installed or required packages that are not in given package list"
   (let ((packages
-	 ;; &rest could contain both symbols and lists
-	 (loop for p in packages
-	       when (listp p) append (mapcar 'el-get-as-symbol p)
-	       else collect (el-get-as-symbol p))))
+         ;; &rest could contain both symbols and lists
+         (loop for p in packages
+               when (listp p) append (mapcar 'el-get-as-symbol p)
+               else collect (el-get-as-symbol p))))
     (when packages
       (loop for (p . prop) in (el-get-read-status-file)
             for s = (plist-get prop 'status)
@@ -238,12 +272,46 @@ are not."
         else do (setq disallowed (plist-put disallowed k v))
         finally return (list update disallowed)))
 
+(defun el-get-diagnosis-properties (old-source new-source)
+  "Diagnosis difference between OLD-SOURCE and NEW-SOURCE.
+
+Return a list (UPDATE-P ADDED-DISALLOWED REMOVED-DISALLOWED).
+UPDATE-P is non-nil when OLD-SOURCE and NEW-SOURCE are different.
+ADDED-DISALLOWED and REMOVED-DISALLOWED are added and removed
+properties, respectively."
+  (let ((added   (el-get-classify-new-properties old-source new-source))
+        (removed (el-get-classify-new-properties new-source old-source)))
+    (list (or (car added) (car removed))
+          (cadr added)
+          (cadr removed))))
+
+(defun el-get-package-or-source (package-or-source)
+  "Given either a package name or a full source entry, return a
+   full source entry."
+  (if (listp package-or-source)
+      (or package-or-source
+          (error "package-or-source cannot be nil"))
+    (el-get-package-def package-or-source)))
+
+(defun el-get-read-cached-recipe (package source &optional package-status-alist)
+  "Read the cached recipe for given PACKAGE: the one we have in the status file.
+
+   If given PACKAGE isn't registered in the status file, and if
+   it's a builtin package, then install it."
+  (or (el-get-read-package-status-recipe package package-status-alist)
+      (if (eq 'builtin (el-get-package-method source))
+          (let ((el-get-default-process-sync t))
+            (el-get-install package))
+        ;; it's not builtin, it's not installed.
+        (error "Package %s is nowhere to be found in el-get status file."
+               package))))
+
 (defun* el-get-merge-properties-into-status (package-or-source
                                              &optional package-status-alist
-                                             &key noerror skip-non-updatable)
-  "Merge updatable properties for package into pacakge status alist (or status file).
+                                             &key noerror)
+  "Merge updatable properties for package into package status alist (or status file).
 
-The first argument is either a package source or a pacakge name,
+The first argument is either a package source or a package name,
 in which case the source will be read using
 `el-get-package-def'. The named package must already be
 installed.
@@ -259,59 +327,45 @@ saved to the status file.
 
 If any non-whitelisted properties differ from the cached values,
 then an error is raise. With optional keyword argument `:noerror
-t', this error is suppressed (but nothing is updated). With
-optional keyword argument `:skip-non-updatable t', the
-whitelisted recipe changes will be merged despite the presence of
-non-whitelisted changes, and no error will be raised.
-"
+t', this error is suppressed (but nothing is updated)."
   (interactive
    (list (el-get-read-package-with-status "Update cached recipe" "installed")
          nil
          :noerror current-prefix-arg))
   (let* ((save-to-file (null package-status-alist))
-         (source
-          (if (listp package-or-source)
-              (or package-or-source
-                  (error "package-or-source cannot be nil"))
-            (el-get-package-def package-or-source)))
-         (package (el-get-as-symbol (el-get-source-name source)))
-         (cached-recipe (or (el-get-read-package-status-recipe
-                             package
-                             package-status-alist)
-                            (error "Could not retrieve cached recipe for package %s"
-                                   package))))
+         (source       (el-get-package-or-source package-or-source))
+         (package      (el-get-as-symbol (el-get-source-name source)))
+         (cached-recipe
+          (el-get-read-cached-recipe package source package-status-alist)))
     (unless (el-get-package-is-installed package)
       (error "Package %s is not installed. Cannot update recipe." package))
-    (when skip-non-updatable
-      ;; Filter out non-whitelisted properties now to avoid the error
-      ;; later.
-      (setq source
-            (loop for (k v) on source by 'cddr
-                  when (memq k el-get-status-recipe-update-whitelist)
-                  append (list k v))))
-    (destructuring-bind (update disallowed)
-        (el-get-classify-new-properties cached-recipe source)
-      (when disallowed
+    (destructuring-bind (update-p added-disallowed removed-disallowed)
+        (el-get-diagnosis-properties cached-recipe source)
+      (when (or added-disallowed removed-disallowed)
         ;; Emit a verbose message if `noerror' is t (but still quit
         ;; the function).
         (funcall (if noerror 'el-get-verbose-message 'error)
-                 "Tried to merge non-whitelisted properties:
+                 "Tried to add non-whitelisted properties:
 
 %s
-into source:
+
+and remove non-whitelisted properties:
+
+%s
+
+into/from source:
 
 %s
 Maybe you should use `el-get-update' or `el-get-reinstall' on %s instead?"
-                 (pp-to-string disallowed)
+                 (if   added-disallowed (pp-to-string   added-disallowed) "()")
+                 (if removed-disallowed (pp-to-string removed-disallowed) "()")
                  (pp-to-string cached-recipe)
                  (el-get-source-name cached-recipe))
         (return-from el-get-merge-properties-into-status))
-      (when update
-        (loop for (k v) on update by 'cddr
-              do (plist-put cached-recipe k v))
+      (when update-p
         (if save-to-file
-            (el-get-save-package-status package "installed" cached-recipe)
+            (el-get-save-package-status package "installed" source)
           (plist-put (cdr (assq package package-status-alist))
-                     'recipe cached-recipe))))))
+                     'recipe source))))))
 
 (provide 'el-get-status)
