@@ -172,8 +172,6 @@
  '(diff-removed ((t (:foreground "DarkMagenta")))))
 
 
-
-
 (defun private-backup-command ()
   (interactive)
   (unless (executable-find "private-backup")
@@ -237,6 +235,7 @@ helm-descbinds
 ;; wgrep-helm
 highlight   ;eval-sexp-fu.el で利用
 ;; indent-guide
+
 key-chord
 nginx-mode
 python-mode
@@ -286,14 +285,15 @@ wdired
     zencoding-mode
     ))
 
+
 ;; (package-install 'dayone)
-(let ((not-installed (loop for x in installing-package-list
-                            when (not (package-installed-p x))
-                            collect x)))
-  (when not-installed
-    (package-refresh-contents)
-    (dolist (pkg not-installed)
-        (package-install pkg))))
+;; (let ((not-installed (loop for x in installing-package-list
+;;                             when (not (package-installed-p x))
+;;                             collect x)))
+;;   (when not-installed
+;;     (package-refresh-contents)
+;;     (dolist (pkg not-installed)
+;;         (package-install pkg))))
 
 ;; el-get で管理しているパッケージ
 ;; M-x el-get-list-packages
@@ -333,3 +333,16 @@ wdired
 (setq x-select-enable-primary t)
 (setq select-active-regions t)
 (setq mouse-drag-copy-region t)
+
+
+(require 'migemo)
+
+;;for mac
+(setq migemo-command "/usr/local/bin/cmigemo")
+(setq migemo-options '("-q" "--emacs"))
+(setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict")
+(setq migemo-user-dictionary nil)
+(setq migemo-coding-system 'utf-8-unix)
+(setq migemo-regex-dictionary nil)
+(load-library "migemo")
+(migemo-init)
