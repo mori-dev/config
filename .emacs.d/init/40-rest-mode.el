@@ -1,9 +1,4 @@
-;; Emacs起動時にrst.elを読み込み
 (require 'rst)
-(require 'rst-goodies)
-
-(defalias 'sc 'sphinx-compile)
-(defalias 'so 'sphinx-browse)
 
 ;; 拡張子の*.rst, *.restのファイルをrst-modeで開く
 (setq auto-mode-alist

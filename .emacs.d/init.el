@@ -63,24 +63,8 @@
 (setq default-tab-width 4)
 (setq tab-width 4)
 
-;; ;;;; 処理の振り分け部分
-
-;; ;; meadow,emacs22,emacs23 を振り分ける。
-;; ;; meadowはmeadow3. meadow3はemacs22なので先に判定している
-;; ;; より細かいことをしたければ必要であればEmacs辞典、ネット検索を利用すること
-
-;; ;; emacsen 共通の設定
-;; (setting-for-all-emacsen)
-
-;; ;; meadow 以外共通の設定
-;; (if (not (featurep 'meadow)) (setting-for-not-meadow))
-
 ;; ;; 個別の設定
 ;; (cond
-;;  ;; Meadow の場合
-;;  ((featurep 'meadow) (setting-for-meadow))
-;;  ;; emacs22 の場合
-;;  ((equal emacs-major-version 22) (setting-for-emacs22))
 ;;  ;; emacs23 の場合
 ;;  ((equal emacs-major-version 23) (setting-for-emacs23))
 ;;  (t nil))
@@ -92,7 +76,6 @@
 ;;リポジトリにMarmaladeを追加
 (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 ;;インストールしたパッケージにロードパスを通してロードする
 (package-initialize)
@@ -112,7 +95,6 @@
 ;;     'help-function (lambda (file) (dired file))
 ;;     'help-echo (purecopy "mouse-2, RET: visit package directory"))
 ;;   )
-
 
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/init")
@@ -272,7 +254,6 @@ wdired
     scss-mode
     smartrep
     haskell-mode
-    multiple-cursors
     mustache
     mustache-mode
     mustang-theme
@@ -280,9 +261,7 @@ wdired
     point-undo
     php-mode
     quickrun
-    syslog-mode
     yaml-mode
-    zencoding-mode
     ))
 
 
