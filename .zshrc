@@ -2,9 +2,19 @@
 # http://mollifier.mit-license.org/
 
 ########################################
+
+# docker
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/b05997/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
 # 環境変数
 export LANG=ja_JP.UTF-8
+export SVN_EDITOR=/usr/bin/emacs
+export EDITOR=/usr/bin/emacs
+export VISUAL="emacsclient -a emacs"
 
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -127,6 +137,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias mkdir='mkdir -p'
+alias b='bundle exec'
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
@@ -157,9 +168,8 @@ case ${OSTYPE} in
         #Mac用の設定
         export CLICOLOR=1
         alias ls='ls -G -F'
-
-        # alias emacsclient='/usr/local/Cellar/emacs/24.3/bin/emacsclient -n'
-
+        alias updatedb='sudo /usr/libexec/locate.updatedb'
+        alias ctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
         ;;
     linux*)
         #Linux用の設定
@@ -176,3 +186,6 @@ if [ -d $HOME/.rbenv/shims ]; then
 fi
 
 export CC=cc
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
