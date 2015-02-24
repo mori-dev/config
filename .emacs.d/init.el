@@ -325,3 +325,10 @@ wdired
 (setq migemo-regex-dictionary nil)
 (load-library "migemo")
 (migemo-init)
+
+
+;; tmp ファイルをつくらないようにする
+;; http://masutaka.net/chalow/2014-05-11-1.html
+(setq create-lockfiles nil)
+(setq auto-save-list-file-prefix nil)
+(setq make-backup-files nil)
