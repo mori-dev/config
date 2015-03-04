@@ -1,1 +1,1 @@
-(setenv "PATH" "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin")
+(setenv "PATH" "/Users/b05997/.nodebrew/current/bin:/Users/b05997/bin:/Users/b05997/Dropbox/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/b05997/bin:/Users/b05997/perl5/bin:/usr/local/bin:/Users/b05997/bin/google_appengine")

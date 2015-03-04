@@ -26,10 +26,7 @@
 
 (setq initial-major-mode 'emacs-lisp-mode)
 
-;;;; ロードパスの設定
-(add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/elisp")
-
 (add-to-list 'load-path "~/.emacs.d/init")
 (add-to-list 'load-path "~/.emacs.d/elisp/dired-extension")
 (add-to-list 'load-path "~/.emacs.d/elisp/howm")
@@ -39,7 +36,6 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/sdic")
 (add-to-list 'load-path "~/.emacs.d/elisp/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/elisp/mylib")
-
 
 (setq load-path (nreverse load-path))
 
@@ -60,8 +56,8 @@
 
 ;; 準備
 (eval-when-compile (require 'cl))
-(setq default-tab-width 4)
-(setq tab-width 4)
+(setq default-tab-width 2)
+(setq tab-width 2)
 
 ;; ;; 個別の設定
 ;; (cond
