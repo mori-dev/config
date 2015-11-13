@@ -1,28 +1,3 @@
-(defface hlline-face
-  '((((class color)
-      (background dark))
-     (:background "gray0"))
-    (((class color)
-      (background light))
-     (:background "SeaGreen" :))
-    (t
-     ()))
-  "Used face hl-line.")
-
-(setq hl-line-face 'hlline-face)
-;; (add-to-list 'default-frame-alist '(cursor-color . "SkyBlue4"))
-
-;; (when (require 'color-theme)
-;;      (color-theme-initialize)
-;;      (color-theme-classic))
-
-(eval-when-compile
-  (require 'color-theme)
-  (require 'color-theme)
-  (color-theme-initialize)
-  (color-theme-molokai) ;; 使うカラーテーマ名
-)
-
 (defun color-theme-molokai () 
   "Color theme based on the Molokai color scheme for vim."
   (interactive)
@@ -38,7 +13,8 @@
      (default ((t (:background "#1B1D1E" :foreground "#F8F8F2"))))
 
      ;; 選択範囲
-     (region ((t (:background "#403D3D"))))
+     ;; (region ((t (:background "#403D3D"))))
+     (region ((t (:background "#cccccc"))))
 
      ;; モードライン
      (mode-line ((t (:foreground "#F8F8F2" :background "#000000"
@@ -93,3 +69,7 @@
      ;; MMM-mode
      (mmm-default-submode-face ((t (:foreground nil :background "#000000"))))
      )))
+
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-molokai) ;; 使うカラーテーマ名

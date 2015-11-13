@@ -140,11 +140,11 @@
     ('eiwa
      (delq nil
            (append
-             (directory-files "~/Dropbox/dict/EIJIRO/" t "EIJI-119.TXT")
-             (directory-files "~/Dropbox/dict/EIJIRO/" t "REIJI119.TXT")
-             (directory-files "~/Dropbox/dict/EIJIRO/" t "RYAKU119.TXT")
+             (directory-files "~/Dropbox/data/dict/EIJIRO/" t "EIJI-119.TXT")
+             (directory-files "~/Dropbox/data/dict/EIJIRO/" t "REIJI119.TXT")
+             (directory-files "~/Dropbox/data/dict/EIJIRO/" t "RYAKU119.TXT")
               )))
-    ('waei (directory-files "~/Dropbox/dict/EIJIRO/" t "WAEI-119.TXT"))))
+    ('waei (directory-files "~/Dropbox/data/dict/EIJIRO/" t "WAEI-119.TXT"))))
 
 ;; (defun eijiro-dictionaries (dir type)
 ;;   (case type
@@ -195,63 +195,3 @@
 ;; How to save (DO NOT REMOVE!!)
 ;; (emacswiki-post "eijiro.el")
 ;;; eijiro.el ends here
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

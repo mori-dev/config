@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <15/01/13 12:49:38 /Users/m/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <15/11/02 15:29:40 /Users/b05997/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -104,4 +104,6 @@
   ("uid-integer" 0)
   ("perl-file-spec" t)
   ("perl-cwd-realpath" t)
-  ("perl" "\\perl")))
+  ("perl" "\\perl"))
+ (["sudo" "root" "pc-8458.cyberagent.co.jp" nil nil]
+  nil))

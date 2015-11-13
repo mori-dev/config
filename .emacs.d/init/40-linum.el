@@ -23,11 +23,11 @@
                            css-mode-hook yaml-mode-hook org-mode-hook nginx-mode
                            howm-mode-hook js2-mode-hook javascript-mode-hook
                            smarty-mode-hook html-helper-mode-hook html-mode-hook coffee-mode-hook
-                           markdown-mode-hook haml-mode-hook typescript-mode))
+                           markdown-mode-hook haml-mode-hook typescript-mode go-mode-hook))
 ;; ファイル名での判定
 (setq my-linum-file '("hosts" "my_site" "sudo:my_site" "nginx.conf"))
 ;; 拡張子での判定
-(setq my-linum-file-extension '("conf" "bat" "rhtml" "erb" "rst" "txt" "hs" "md" "mkd" "markdown" "haml" "ejs" "ts"))
+(setq my-linum-file-extension '("conf" "bat" "rhtml" "erb" "rst" "txt" "hs" "md" "mkd" "markdown" "haml" "ejs" "ts" "go"))
 
 
 ;; メージャーモード/マイナーモードでの指定

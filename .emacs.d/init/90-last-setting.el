@@ -1,5 +1,8 @@
 ;; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
 
+(setq default-tab-width 2)
+(setq tab-width 2)
+
 ;; ;; 優先させる設定
 (tool-bar-mode -1)
 
@@ -390,3 +393,31 @@
 
 ;;開いているファイルが他のソフトによって更新されたときに自動的に再読み込み
 (global-auto-revert-mode)
+
+(setq standard-indent 2)
+
+;; .svg ファイルを emacs で開こうとすると以下のエラーになる対策。詳細は image.el 参照。
+;; image-type: Invalid image type `svg'
+(setq image-type-file-name-regexps
+  '(("\\.png\\'" . png)
+    ("\\.gif\\'" . gif)
+    ("\\.jpe?g\\'" . jpeg)
+    ("\\.bmp\\'" . bmp)
+    ("\\.xpm\\'" . xpm)
+    ("\\.pbm\\'" . pbm)
+    ("\\.xbm\\'" . xbm)
+    ("\\.ps\\'" . postscript)
+    ("\\.tiff?\\'" . tiff)
+    ))
+
+(setq image-type-auto-detectable
+  '((pbm . t)
+    (xbm . nil)
+    (bmp . maybe)
+    (gif . maybe)
+    (png . maybe)
+    (xpm . nil)
+    (jpeg . maybe)
+    (tiff . maybe)
+    (svg . nil)
+    (postscript . nil)))

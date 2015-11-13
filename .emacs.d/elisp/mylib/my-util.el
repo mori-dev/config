@@ -561,5 +561,6 @@
       (otherwise (message "NG. private-backup fail."))))
 
 (global-set-key (kbd "<f12>") 'private-backup-command)
+(defalias 'bk 'private-backup-command)
 
 (provide 'my-util)

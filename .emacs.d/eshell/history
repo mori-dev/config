@@ -78,3 +78,9 @@ cd ..
 rm -rf lib
 cd ..
 rm -rf info
+ls
+mkdir common
+ls
+mkdir services
+tree .
+mkdir app

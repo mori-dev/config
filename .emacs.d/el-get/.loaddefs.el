@@ -3,7 +3,7 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (21687 29411
+;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (21739 62389
 ;;;;;;  0 0))
 ;;; Generated autoloads from el-get/el-get.el
 
@@ -104,7 +104,7 @@ already installed packages is considered.
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-bundle" "el-get/el-get-bundle.el"
-;;;;;;  (21687 29411 0 0))
+;;;;;;  (21739 62389 0 0))
 ;;; Generated autoloads from el-get/el-get-bundle.el
 
 (autoload 'el-get-bundle-el-get "el-get/el-get-bundle" "\
@@ -154,7 +154,7 @@ required.
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-list-packages" "el-get/el-get-list-packages.el"
-;;;;;;  (21687 29411 0 0))
+;;;;;;  (21739 62389 0 0))
 ;;; Generated autoloads from el-get/el-get-list-packages.el
 
 (autoload 'el-get-list-packages "el-get/el-get-list-packages" "\
@@ -164,11 +164,43 @@ Display a list of packages.
 
 ;;;***
 
-;;;### (autoloads nil nil ("el-get/el-get-autoloading.el" "el-get/el-get-build.el"
-;;;;;;  "el-get/el-get-byte-compile.el" "el-get/el-get-core.el" "el-get/el-get-custom.el"
-;;;;;;  "el-get/el-get-dependencies.el" "el-get/el-get-install.el"
-;;;;;;  "el-get/el-get-methods.el" "el-get/el-get-notify.el" "el-get/el-get-recipes.el"
-;;;;;;  "el-get/el-get-status.el") (21687 29416 666864 0))
+;;;### (autoloads nil "git-modes/gitattributes-mode" "git-modes/gitattributes-mode.el"
+;;;;;;  (21862 62430 0 0))
+;;; Generated autoloads from git-modes/gitattributes-mode.el
+
+(autoload 'gitattributes-mode "git-modes/gitattributes-mode" "\
+A major mode for editing .gitattributes files.
+\\{gitattributes-mode-map}
+
+\(fn)" t nil)
+
+(dolist (pattern '("/\\.gitattributes\\'" "/\\.git/info/attributes\\'" "/git/attributes\\'")) (add-to-list 'auto-mode-alist (cons pattern #'gitattributes-mode)))
+
+;;;***
+
+;;;### (autoloads nil "git-modes/gitconfig-mode" "git-modes/gitconfig-mode.el"
+;;;;;;  (21862 62430 0 0))
+;;; Generated autoloads from git-modes/gitconfig-mode.el
+
+(autoload 'gitconfig-mode "git-modes/gitconfig-mode" "\
+A major mode for editing .gitconfig files.
+
+\(fn)" t nil)
+
+(dolist (pattern '("/\\.gitconfig\\'" "/\\.git/config\\'" "/git/config\\'" "/\\.gitmodules\\'")) (add-to-list 'auto-mode-alist (cons pattern 'gitconfig-mode)))
+
+;;;***
+
+;;;### (autoloads nil "git-modes/gitignore-mode" "git-modes/gitignore-mode.el"
+;;;;;;  (21862 62430 0 0))
+;;; Generated autoloads from git-modes/gitignore-mode.el
+
+(autoload 'gitignore-mode "git-modes/gitignore-mode" "\
+A major mode for editing .gitignore files.
+
+\(fn)" t nil)
+
+(dolist (pattern (list "/\\.gitignore\\'" "/\\.git/info/exclude\\'" "/git/ignore\\'")) (add-to-list 'auto-mode-alist (cons pattern 'gitignore-mode)))
 
 ;;;***
 
