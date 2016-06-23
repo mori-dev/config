@@ -189,3 +189,16 @@ export CC=cc
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+function cde () {
+    EMACS_CWD=`emacsclient -e "
+     (expand-file-name
+      (with-current-buffer
+          (nth 1
+               (assoc 'buffer-list
+                      (nth 1 (nth 1 (current-frame-configuration)))))
+        default-directory))" | sed 's/^"\(.*\)"$/\1/'`
+
+    echo "chdir to $EMACS_CWD"
+    cd "$EMACS_CWD"
+}

@@ -6,7 +6,9 @@
 (global-set-key (kbd "C-M-f") 'forward-word)
 (global-set-key (kbd "M-f") 'my-forward-to-word)
 (global-set-key (kbd "M-<f12>") 'my-fullscreen)
-(global-set-key (kbd "<f11>") nil)
+;; (global-set-key (kbd "C-<f1>") 'kmacro-call-macro)
+;; (global-set-key (kbd "C-<f2>") 'kmacro-start-macro)
+;; (global-set-key (kbd "C-<f3>") 'kmacro-end-macro)
 
 
 (defun zwei-backward-up-list (&optional arg)

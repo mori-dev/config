@@ -56,8 +56,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (tango-dark)))
- '(js2-basic-offset 2 t)
- '(js2-bounce-indent-p nil t)
+ ;; '(js2-bounce-indent-p nil t)
+ '(migemo-isearch-enable-p nil)
  '(php-doc-author (format "your name <%s>" php-doc-mail-address))
  '(php-doc-license "The MIT License" t)
  '(php-doc-mail-address "your email address" t)
@@ -205,17 +205,17 @@ wdired
 (setq select-active-regions t)
 (setq mouse-drag-copy-region t)
 
-(require 'migemo)
+;; (require 'migemo)
 
-;;for mac
-(setq migemo-command "/usr/local/bin/cmigemo")
-(setq migemo-options '("-q" "--emacs"))
-(setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict")
-(setq migemo-user-dictionary nil)
-(setq migemo-coding-system 'utf-8-unix)
-(setq migemo-regex-dictionary nil)
-(load-library "migemo")
-(migemo-init)
+;; ;;for mac
+;; (setq migemo-command "/usr/local/bin/cmigemo")
+;; (setq migemo-options '("-q" "--emacs"))
+;; (setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict")
+;; (setq migemo-user-dictionary nil)
+;; (setq migemo-coding-system 'utf-8-unix)
+;; (setq migemo-regex-dictionary nil)
+;; (load-library "migemo")
+;; (migemo-init)
 
 
 ;; tmp ファイルをつくらないようにする
@@ -247,7 +247,10 @@ wdired
 (global-whitespace-mode 1)
 (global-set-key (kbd "C-x w") 'global-whitespace-mode)
 
-
 (require 'exec-path-from-shell)
 (let ((envs '("PATH" "GOPATH")))
   (exec-path-from-shell-copy-envs envs))
+
+(global-set-key (kbd "C-5") 'kmacro-call-macro)
+(global-set-key (kbd "C-]") 'kmacro-start-macro)
+(global-set-key (kbd "C-M-]") 'kmacro-end-macro)

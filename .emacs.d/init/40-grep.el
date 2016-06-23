@@ -16,6 +16,12 @@
 (add-to-list 'grep-find-ignored-directories "log")
 (add-to-list 'grep-find-ignored-directories "auto-save-alist")
 (add-to-list 'grep-find-ignored-directories "dropbox.db")
+(add-to-list 'grep-find-ignored-directories "node_modules")
+
+(add-to-list 'grep-find-ignored-files "lancers.js")
+(add-to-list 'grep-find-ignored-files "lancers.js.map")
+
+
 (setq grep-host-defaults-alist nil)
 (setq grep-template "lgrep <C> -n <R> <F> <N>") ;lgrep
 ;; (setq grep-template "ack <C> --nocolor --nogroup <R> <F> <N>")

@@ -43,25 +43,6 @@ plugins.options['launcher.apps'] = {
 // 日本語だけトラッキング
 plugins.options["twitter_client.tracking_langage"] = "ja";
 
-// 最近閉じたタブを一覧表示
-ext.add("list-closed-tabs", function () {
-    const fav = "chrome://mozapps/skin/places/defaultFavicon.png";
-    var ss   = Cc["@mozilla.org/browser/sessionstore;1"].getService(Ci.nsISessionStore);
-    var json = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
-    var closedTabs = [[tab.image || fav, tab.title] for each (tab in json.decode(ss.getClosedTabData(window)))];
-
-    if (!closedTabs.length)
-        return void display.echoStatusBar("最近閉じたタブが見つかりませんでした", 2000);
-
-    prompt.selector(
-        {
-            message    : "select tab to undo:",
-            collection : closedTabs,
-            flags      : [ICON | IGNORE, 0],
-            callback   : function (i) { if (i >= 0) window.undoCloseTab(i); }
-        });
-}, "List closed tabs");
-
 key.setViewKey('C-8', function () {
     ext.exec("list-closed-tabs");
 }, '最近閉じたタブを一覧表示');

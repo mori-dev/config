@@ -27,8 +27,10 @@
 ;; ファイル名での判定
 (setq my-linum-file '("hosts" "my_site" "sudo:my_site" "nginx.conf"))
 ;; 拡張子での判定
-(setq my-linum-file-extension '("conf" "bat" "rhtml" "erb" "rst" "txt" "hs" "md" "mkd" "markdown" "haml" "ejs" "ts" "go"))
-
+(setq my-linum-file-extension
+      '("conf" "bat" "rhtml" "erb" "rst"
+        "txt" "hs" "md" "mkd" "markdown"
+        "haml" "ejs" "ts" "go" "js" "jsx"))
 
 ;; メージャーモード/マイナーモードでの指定
 (defvar my-linum-hook-name nil)

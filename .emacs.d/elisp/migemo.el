@@ -71,6 +71,8 @@
   "*Enable the migemo feature on isearch or not."
   :group 'migemo
   :type 'boolean)
+;; mori hack C-s で migemo を使わない
+;; (setq migemo-isearch-enable-p nil)
 
 (defcustom migemo-use-default-isearch-keybinding t
   "*If non-nil, set migemo default keybinding for isearch in `migemo-init'."

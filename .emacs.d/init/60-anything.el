@@ -71,8 +71,8 @@
 (setq anything-sources nil)   ; anything-sources の初期化
 
 ;; ;;必須の情報源
-
 (add-to-list 'anything-sources 'anything-c-source-buffers+-howm-title t)
+
 
 ;; (setq anything-sources nil)
 ;; (add-to-list 'anything-sources 'anything-c-source-buffers t)
