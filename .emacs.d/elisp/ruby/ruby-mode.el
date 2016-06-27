@@ -325,39 +325,40 @@ Also ignores spaces after parenthesis when 'space."
   (setq paragraph-ignore-fill-prefix t))
 
 (defun ruby-mode-set-encoding ()
-  (save-excursion
-    (widen)
-    (goto-char (point-min))
-    (when (re-search-forward "[^\0-\177]" nil t)
-      (goto-char (point-min))
-      (let ((coding-system
-             (or coding-system-for-write
-                 buffer-file-coding-system)))
-        (if coding-system
-            (setq coding-system
-                  (or (coding-system-get coding-system 'mime-charset)
-                      (coding-system-change-eol-conversion coding-system nil))))
-        (setq coding-system
-              (if coding-system
-                  (symbol-name
-                   (or (and ruby-use-encoding-map
-                            (cdr (assq coding-system ruby-encoding-map)))
-                       coding-system))
-                "ascii-8bit"))
-        (if (looking-at "^#!") (beginning-of-line 2))
-        (cond ((looking-at "\\s *#.*-\*-\\s *\\(en\\)?coding\\s *:\\s *\\([-a-z0-9_]*\\)\\s *\\(;\\|-\*-\\)")
-               (unless (string= (match-string 2) coding-system)
-                 (goto-char (match-beginning 2))
-                 (delete-region (point) (match-end 2))
-                 (and (looking-at "-\*-")
-                      (let ((n (skip-chars-backward " ")))
-                        (cond ((= n 0) (insert "  ") (backward-char))
-                              ((= n -1) (insert " "))
-                              ((forward-char)))))
-                 (insert coding-system)))
-              ((looking-at "\\s *#.*coding\\s *[:=]"))
-              (t (insert "# -*- coding: " coding-system " -*-\n"))
-              )))))
+  ;; (save-excursion
+  ;;   (widen)
+  ;;   (goto-char (point-min))
+  ;;   (when (re-search-forward "[^\0-\177]" nil t)
+  ;;     (goto-char (point-min))
+  ;;     (let ((coding-system
+  ;;            (or coding-system-for-write
+  ;;                buffer-file-coding-system)))
+  ;;       (if coding-system
+  ;;           (setq coding-system
+  ;;                 (or (coding-system-get coding-system 'mime-charset)
+  ;;                     (coding-system-change-eol-conversion coding-system nil))))
+  ;;       (setq coding-system
+  ;;             (if coding-system
+  ;;                 (symbol-name
+  ;;                  (or (and ruby-use-encoding-map
+  ;;                           (cdr (assq coding-system ruby-encoding-map)))
+  ;;                      coding-system))
+  ;;               "ascii-8bit"))
+  ;;       (if (looking-at "^#!") (beginning-of-line 2))
+  ;;       (cond ((looking-at "\\s *#.*-\*-\\s *\\(en\\)?coding\\s *:\\s *\\([-a-z0-9_]*\\)\\s *\\(;\\|-\*-\\)")
+  ;;              (unless (string= (match-string 2) coding-system)
+  ;;                (goto-char (match-beginning 2))
+  ;;                (delete-region (point) (match-end 2))
+  ;;                (and (looking-at "-\*-")
+  ;;                     (let ((n (skip-chars-backward " ")))
+  ;;                       (cond ((= n 0) (insert "  ") (backward-char))
+  ;;                             ((= n -1) (insert " "))
+  ;;                             ((forward-char)))))
+  ;;                (insert coding-system)))
+  ;;             ((looking-at "\\s *#.*coding\\s *[:=]"))
+  ;;             (t (insert "# -*- coding: " coding-system " -*-\n"))
+  ;;             ))))
+  )
 
 (defun ruby-current-indentation ()
   (save-excursion
@@ -1498,13 +1499,13 @@ The variable ruby-indent-level controls the amount of indentation.
   (make-local-variable 'add-log-current-defun-function)
   (setq add-log-current-defun-function 'ruby-add-log-current-method)
 
-  (add-hook
-   (cond ((boundp 'before-save-hook)
-          (make-local-variable 'before-save-hook)
-          'before-save-hook)
-         ((boundp 'write-contents-functions) 'write-contents-functions)
-         ((boundp 'write-contents-hooks) 'write-contents-hooks))
-   'ruby-mode-set-encoding)
+  ;; (add-hook
+  ;;  (cond ((boundp 'before-save-hook)
+  ;;         (make-local-variable 'before-save-hook)
+  ;;         'before-save-hook)
+  ;;        ((boundp 'write-contents-functions) 'write-contents-functions)
+  ;;        ((boundp 'write-contents-hooks) 'write-contents-hooks))
+  ;;  'ruby-mode-set-encoding)
 
   (set (make-local-variable 'font-lock-defaults) '((ruby-font-lock-keywords) nil nil))
   (set (make-local-variable 'font-lock-keywords) ruby-font-lock-keywords)

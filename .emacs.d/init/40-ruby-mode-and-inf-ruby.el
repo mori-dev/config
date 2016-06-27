@@ -1,6 +1,9 @@
 ;; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
 
 (require 'ruby-mode)
+;; encodingを自動挿入しないようにする
+(defun ruby-mode-set-encoding () nil)
+
 (defalias 'r 'indent-region)
 (defalias 'rubyf 'indent-region)
 
@@ -11,8 +14,15 @@
 (setq ruby-deep-indent-paren-style nil)
 
 
+;; ;; # -*- coding: utf-8 -*- の自動挿入を抑止
+(defun ruby-mode-hook-init ()
+  "encodingを自動挿入しないようにする"
+  (remove-hook 'before-save-hook 'ruby-mode-set-encoding))
+;; (add-hook 'ruby-mode-hook 'ruby-mode-hook-init)
+
 (add-hook 'ruby-mode-hook
   (lambda ()
+    (remove-hook 'before-save-hook 'ruby-mode-set-encoding)
     (modify-syntax-entry ?@ "_" ruby-mode-syntax-table)
     (modify-syntax-entry ?: "_" ruby-mode-syntax-table)
     (modify-syntax-entry ?! "_" ruby-mode-syntax-table)
@@ -58,21 +68,9 @@
 
 
 
-;; # -*- coding: utf-8 -*- の自動挿入を抑止
-(defun ruby-mode-hook-init ()
-  "encodingを自動挿入しないようにする"
-  (remove-hook 'before-save-hook 'ruby-mode-set-encoding))
-(add-hook 'ruby-mode-hook 'ruby-mode-hook-init)
 
-(defun my-ruby-mode-set-encoding ()
-  "set-encoding ruby-mode"
-  (interactive)
-  (ruby-mode-set-encoding))
 
-(define-key ruby-mode-map "\C-ce" 'my-ruby-mode-set-encoding)
 
-;; (require 'inf-ruby)
-;; (add-hook 'ruby-mode-hook 'inf-ruby-keys)
 (defadvice inf-ruby-keys (around my-inf-ruby-keys activate)
   (define-key ruby-mode-map "\M-\C-x" 'ruby-send-definition)
 ;  (define-key ruby-mode-map "\C-x\C-e" 'ruby-send-last-sexp)
@@ -340,49 +338,9 @@ print(which_library(%%[%s]))'" name name)))
      (cd ,dir)
      ,@body))
 
-
-
-
-
-
 (defun rubygems-search ()
   (interactive)
   (let ((word (read-from-minibuffer "search gem:")))
     (browse-url (format "https://rubygems.org/search?query=%s" word))))
 
 (defalias 'ruby-gems-search 'rubygems-search)
-
-
-
-;; (defun ruby-insert-magic-comment-if-needed ()
-;;   "バッファのcoding-systemをもとにmagic commentをつける。"
-;;   (when (and (eq major-mode 'ruby-mode)
-;;              (find-multibyte-characters (point-min) (point-max) 1))
-;;     (save-excursion
-;;       (goto-char 1)
-;;       (when (looking-at "^#!")
-;;         (forward-line 1))
-;;       (if (re-search-forward "^#.+coding" (point-at-eol) t)
-;;           (delete-region (point-at-bol) (point-at-eol))
-;;         (open-line 1))
-;;       (let* ((coding-system (symbol-name buffer-file-coding-system))
-;;              (encoding (cond ((string-match "japanese-iso-8bit\\|euc-j" coding-system)
-;;                               "euc-jp")
-;;                              ((string-match "shift.jis\\|sjis\\|cp932" coding-system)
-;;                               "shift_jis")
-;;                              ((string-match "utf-8" coding-system)
-;;                               "utf-8"))))
-;;         (insert (format "# coding: %s " encoding))))))
-
-;; (add-hook 'before-save-hook 'ruby-insert-magic-comment-if-needed)
-
-(defun ruby-mode-hook-init ()
-  "encodingを自動挿入しないようにする"
-  (remove-hook 'before-save-hook 'ruby-mode-set-encoding))
-(add-hook 'ruby-mode-hook 'ruby-mode-hook-init)
-
-(defun my-ruby-mode-set-encoding ()
-  "set-encoding ruby-mode"
-  (interactive)
-  (ruby-mode-set-encoding))
-(define-key ruby-mode-map "\C-ce" 'my-ruby-mode-set-encoding)
