@@ -70,6 +70,8 @@ Also, if called inside of a string, moves back up out of that string."
 (global-set-key (kbd "C-9") (defun my-insert-double-quote () (interactive) (insert "\"")))
 (global-set-key (kbd "C-0") (defun my-insert-single-quote () (interactive) (insert "\'")))
 (global-set-key (kbd "C-7") (defun my-insert-back-quote () (interactive) (insert "\`")))
+(defun my-insert-back-quote () (interactive) (insert "\\"))
+
 ;; (global-set-key (kbd "C-6") (defun my-insert-back-quote () (interactive) (insert "&")))
 ;; (global-set-key (kbd "C-@") (defun my-insert-_ () (interactive) (insert "_")))
 ;; (global-set-key (kbd "C-4") (defun my-insert-back-quote () (interactive) (insert "$")))

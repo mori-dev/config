@@ -254,3 +254,12 @@ wdired
 (global-set-key (kbd "C-5") 'kmacro-call-macro)
 (global-set-key (kbd "C-]") 'kmacro-start-macro)
 (global-set-key (kbd "C-M-]") 'kmacro-end-macro)
+
+
+;; (defun find-file-upward (file-name &optional dir)
+;;   (interactive)
+;;   (let ((default-directory (file-name-as-directory (or dir default-directory))))
+;;     (if (file-exists-p file-name)
+;;         (expand-file-name file-name)
+;;       (unless (string= "/" (directory-file-name default-directory))
+;;         (find-file-upward file-name (expand-file-name ".." default-directory))))))
