@@ -7,4 +7,4 @@
 ;; (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.less\\'" . css-mode))
 (autoload 'css-mode "css-mode" nil t)
-(setq css-indent-level 2)
+(setq css-indent-level 4)

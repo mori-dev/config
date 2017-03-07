@@ -637,3 +637,42 @@ Return file path, when TAGS file is found."
 ;; (global-set-key (kbd "M-h") 'ac-complete-look)
 (when (require 'key-chord nil t)
   (key-chord-define-global "dn" 'ac-complete-look))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'auto-complete)
+(require 'json)
+
+(defvar flow-program "flow")
+
+(defun flow--get-completions ()
+  (assoc-default
+   'result
+   (json-read-from-string
+    (with-output-to-string
+      (let ((line (line-number-at-pos))
+            (col (1+ (current-column))))
+        (call-process-region
+         (point-min) (point-max) flow-program nil standard-output nil
+         "autocomplete"
+         "--json"
+         (number-to-string line)
+         (number-to-string col)))))))
+
+(defun flow--ac-prefix ()
+  (when (re-search-backward "\\(?:\\.\\)\\(\\(?:[a-zA-Z0-9][_a-zA-Z0-9]*\\)?\\)\\=" nil t)
+    (match-beginning 1)))
+
+(defun flow--ac-candidates ()
+  (mapcar
+   (lambda (c)
+     (popup-make-item
+      (assoc-default 'name c)
+      :summary (assoc-default 'type c)))
+   (flow--get-completions)))
+
+(ac-define-source flow
+  '((candidates . flow--ac-candidates)
+    (prefix . flow--ac-prefix)
+    (requires . 0)))

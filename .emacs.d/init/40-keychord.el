@@ -150,3 +150,6 @@
     (switch-to-buffer (get-buffer "*scratch*"))))
 
 (key-chord-define-global "0-" 'my-switch-to-scratch/current-buffer)
+
+;; /Users/mori/.emacs.d/init/70-auto-complete.el
+(key-chord-define-global "ui" 'ac-complete-flow)
