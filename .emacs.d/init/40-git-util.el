@@ -137,11 +137,41 @@
       (diff-mode)
       (goto-char (point-min)))))
 
+(defun my-git-cat-this-word ()
+  (interactive)
+  (let ((word (or (thing-at-point 'word) "")))
+    (unless (git-repo-p) (error "git 管理下にありません"))
+    (let ((dir (concat (find-file-upward ".git") "/../"))
+          (buf "*git show*"))
+      (with-temp-directory dir
+         (awhen (get-buffer buf)
+                (with-current-buffer it (erase-buffer)))
+         (call-process-shell-command (concat "git show " word) nil buf t))
+      (switch-to-buffer buf)
+      (diff-mode)
+      (goto-char (point-min)))))
+
+;; (defun my-git-checkout-this-commit ()
+;;   (interactive)
+;;   (let ((word (or (thing-at-point 'word) "")))
+;;     (unless (git-repo-p) (error "git 管理下にありません"))
+;;     (let ((dir (concat (find-file-upward ".git") "/../"))
+;;           (buf "*git show*"))
+;;       (with-temp-directory dir
+;;          (awhen (get-buffer buf)
+;;                 (with-current-buffer it (erase-buffer)))
+;;          (call-process-shell-command (concat "git checkout " word) nil buf t))
+;;       (switch-to-buffer buf)
+;;       (diff-mode)
+;;       (goto-char (point-min)))))
+
 
 (defalias 'glog 'git-log-p-this-file)
 (defalias 'gdiff 'my-git-diff)
 (defalias 'gdiff-this-file 'my-git-diff-this-file)
 (defalias 'gco 'my-git-checkout-this-file)
+;; (defalias 'gcc 'my-git-checkout-this-commit)
+
 (defalias 'gr 'my-git-log-origin)
 
 (defalias 'glogs 'my-git-log-S)
