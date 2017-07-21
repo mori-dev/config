@@ -1,5 +1,4 @@
 [init]
-    templatedir = ~/.git-hooks
 [user]
     name = mori-dev
     email = mori.dev.asdf@gmail.com
@@ -8,29 +7,21 @@
 [color]
 [core]
     excludesfile = ~/.gitignore_global
+    attributesfile = ~/.gitattributes
     pager = less -NRij10
 	quotepath = false
 [push]
     default = current
     #default = tracking       # defaultのpush先はtrackingしているリポジトリ
 [alias]
+    showpr = !"f() { git log --merges --oneline --reverse --ancestry-path $1..development | grep 'Merge pull request #' | head -n 1; }; f"
+    openpr = "!f() { hub browse -- `git log --merges --oneline --reverse --ancestry-path $1..development | grep 'Merge pull request #' | head -n 1 | cut -f5 -d' ' | sed -e 's%#%pull/%'`; }; f"
+    refs = !git checkout $(git branch | peco | awk '{ print $NF }')
     st = status
     co = checkout
     ci = commit -v
     di = diff
     br = branch
-    puhs = push
-    psuh = push
-    pus = push
-    puh = push
-    pl = !git pull && git submodule update --init
-    so = remote show origin
-    ft = fetch
-    up = pull --rebase       # pull rebase
-    rbm = rebase master      # masterへのrebaseはよく使うのでalias
-    ad = add
-    ci = commit -a           # modifiedなファイルを全てstageへ
-    cam = commit -a --amend  # 直前のcommitを修正
     co = checkout
     # branch関連
     br = branch
@@ -73,3 +64,9 @@
 	token = 4e9fd48d1fffe1a2e50dc52597fa840326880f94
 [fetch]
 	prune = true
+[credential]
+	helper = osxkeychain
+[http]
+	postBuffer = 524288000
+[ghq]
+	root = /Users/mori/dev/src

@@ -137,6 +137,13 @@
       (diff-mode)
       (goto-char (point-min)))))
 
+(defun my-git-show-pr-this-word ()
+  (interactive)
+  (let ((word (or (thing-at-point 'word) "")))
+    (unless (git-repo-p) (error "git 管理下にありません"))
+    (call-process-shell-command (concat "git openpr " word))))
+(defalias 'gpr 'my-git-show-pr-this-word)
+
 (defun my-git-cat-this-word ()
   (interactive)
   (let ((word (or (thing-at-point 'word) "")))
