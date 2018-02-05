@@ -54,6 +54,8 @@
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Guardfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Fastfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Matchfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile.lock" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile.lock" . ruby-mode))
