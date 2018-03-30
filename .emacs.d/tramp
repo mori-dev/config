@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <17/02/21 09:59:43 /Users/mori/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <18/02/06 14:50:15 /Users/mori/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -105,5 +105,5 @@
   ("perl-file-spec" t)
   ("perl-cwd-realpath" t)
   ("perl" "\\perl"))
- (["su" "root" "morikazuhiko-no-MacBook-Pro.local" nil nil]
+ (["ssh" nil "wss" nil nil]
   nil))

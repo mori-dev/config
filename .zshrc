@@ -1,12 +1,20 @@
 # License : MIT
 # http://mollifier.mit-license.org/
 
+
 ########################################
 
+# export ANDROID_SDK_ROOT='/usr/local/Cellar/android-sdk/24.4.1_1'
+
+export REACT_EDITOR=em
+
 # docker
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/b05997/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
+# export DOCKER_HOST=tcp://192.168.59.103:2376
+# export DOCKER_CERT_PATH=/Users/b05997/.boot2docker/certs/boot2docker-vm
+# export DOCKER_TLS_VERIFY=1
+
+# PostgreSQLで使うデフォルトのデーベースディレクトリを環境変数に設定
+export PGDATA=/usr/local/var/postgres
 
 # 環境変数
 export LANG=ja_JP.UTF-8
@@ -124,10 +132,12 @@ setopt extended_glob
 # キーバインド
 
 # ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-bindkey '^R' history-incremental-pattern-search-backward
+# bindkey '^R' history-incremental-pattern-search-backward
 
 ########################################
 # エイリアス
+
+alias fig='docker-compose'
 
 alias la='ls -a'
 alias ll='ls -l'
@@ -202,3 +212,91 @@ function cde () {
     echo "chdir to $EMACS_CWD"
     cd "$EMACS_CWD"
 }
+
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+
+# aws ses
+export AWS_SES_ACCESS_KEY=AKIAJCCNT2GCMMBX4QDQ
+export AWS_SES_SECRET_KEY=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
+
+###-tns-completion-start-###
+if [ -f /Users/mori/.tnsrc ]; then 
+    source /Users/mori/.tnsrc 
+fi
+###-tns-completion-end-###
+
+function peco-branch () {
+    local branch=$(git branch -a | peco | tr -d ' ' | tr -d '*')
+    if [ -n "$branch" ]; then
+      if [ -n "$LBUFFER" ]; then
+        local new_left="${LBUFFER%\ } $branch"
+      else
+        local new_left="$branch"
+      fi
+      BUFFER=${new_left}${RBUFFER}
+      CURSOR=${#new_left}
+    fi
+}
+zle -N peco-branch
+bindkey '^xb' peco-branch # C-x b でブランチ選択
+
+function peco-find-file() {
+    if git rev-parse 2> /dev/null; then
+        source_files=$(git ls-files)
+    else
+        source_files=$(find . -type f)
+    fi
+    selected_files=$(echo $source_files | peco --prompt "[find file]")
+
+    BUFFER="${BUFFER}${echo $selected_files | tr '\n' ' '}"
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+zle -N peco-find-file
+bindkey '^xq' peco-find-file
+
+# Ctrl ]
+bindkey '^]' peco-cd
+
+function peco-cd () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+
+zle -N peco-cd
+
+
+# Ctrl [
+bindkey '^[' peco-hub
+
+function peco-hub () {
+  local selected_repo=$(ghq list | peco | cut -d "/" -f 2,3)
+  if [ -n "$selected_repo" ]; then
+    BUFFER="hub browse ${selected_repo}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+
+zle -N peco-hub
+
+alias ghqhub='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
