@@ -59,7 +59,7 @@
  '(migemo-isearch-enable-p nil)
  '(package-selected-packages
    (quote
-    (yaml-mode wgrep-helm wgrep-ack undohist sudo-ext smartrep smartparens simple-httpd session scss-mode scala-mode2 sass-mode ruby-compilation ruby-block rspec-mode rhtml-mode rfringe rbenv quickrun python-mode prettier-js pos-tip popwin point-undo php-mode pandoc-mode open-junk-file nginx-mode mustang-theme mustache-mode multiple-cursors markdown-mode magit let-alist key-chord jump js2-mode js-doc init-loader indent-guide highlight-cl highlight hide-lines helm-descbinds helm-c-moccur helm haskell-mode handlebars-mode gtags grep-a-lot google-c-style go-eldoc go-direx go-autocomplete git-timemachine git-gutter-fringe flycheck exec-path-from-shell electric-case dockerfile-mode dired-single dired+ dayone csv-mode css-mode css-eldoc color-theme-railscasts color-moccur apache-mode anzu alect-themes)))
+    (yaml-mode undohist sudo-ext session scss-mode sass-mode ruby-compilation ruby-block rspec-mode rhtml-mode rfringe python-mode prettier-js pos-tip popwin point-undo php-mode pandoc-mode nginx-mode mustache-mode markdown-mode magit let-alist key-chord jump js2-mode init-loader indent-guide highlight-cl highlight hide-lines helm-descbinds helm-c-moccur helm haskell-mode handlebars-mode grep-a-lot go-eldoc go-autocomplete git-timemachine git-gutter-fringe flycheck exec-path-from-shell electric-case dockerfile-mode dired-single dired+ csv-mode css-mode css-eldoc color-moccur anzu)))
  '(php-doc-author (format "your name <%s>" php-doc-mail-address))
  '(php-doc-license "The MIT License" t)
  '(php-doc-mail-address "your email address" t)
