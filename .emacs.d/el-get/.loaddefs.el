@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (22275 31702
-;;;;;;  0 0))
+;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (23494 52709
+;;;;;;  818898 967000))
 ;;; Generated autoloads from el-get/el-get.el
 
 (autoload 'el-get-version "el-get/el-get" "\
@@ -104,7 +104,7 @@ already installed packages is considered.
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-bundle" "el-get/el-get-bundle.el"
-;;;;;;  (22275 31702 0 0))
+;;;;;;  (23494 52709 818898 967000))
 ;;; Generated autoloads from el-get/el-get-bundle.el
 
 (autoload 'el-get-bundle-el-get "el-get/el-get-bundle" "\
@@ -140,7 +140,7 @@ version is used if `el-get-bundle-byte-compile' is non-nil.
 
 \(fn PACKAGE &rest FORM)" nil t)
 
-(put 'el-get-bundle 'lisp-indent-function 'defun)
+(function-put 'el-get-bundle 'lisp-indent-function 'defun)
 
 (autoload 'el-get-bundle! "el-get/el-get-bundle" "\
 Install PACKAGE and run initialization form.
@@ -149,12 +149,12 @@ required.
 
 \(fn PACKAGE &rest ARGS)" nil t)
 
-(put 'el-get-bundle! 'lisp-indent-function 'defun)
+(function-put 'el-get-bundle! 'lisp-indent-function 'defun)
 
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-list-packages" "el-get/el-get-list-packages.el"
-;;;;;;  (22275 31702 0 0))
+;;;;;;  (23494 52709 818898 967000))
 ;;; Generated autoloads from el-get/el-get-list-packages.el
 
 (autoload 'el-get-list-packages "el-get/el-get-list-packages" "\

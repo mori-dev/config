@@ -18,9 +18,8 @@
 (add-to-list 'grep-find-ignored-directories "dropbox.db")
 (add-to-list 'grep-find-ignored-directories "node_modules")
 
-(add-to-list 'grep-find-ignored-files "lancers.js")
-(add-to-list 'grep-find-ignored-files "lancers.js.map")
-
+(add-to-list 'grep-find-ignored-files "bundle.js")
+(add-to-list 'grep-find-ignored-files "bundle.js.map")
 
 (setq grep-host-defaults-alist nil)
 (setq grep-template "lgrep <C> -n <R> <F> <N>") ;lgrep

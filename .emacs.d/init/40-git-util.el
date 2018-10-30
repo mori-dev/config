@@ -52,6 +52,19 @@
       (diff-mode)
       (goto-char (point-min)))))
 
+(defun my-git-blame-pr ()
+  (interactive)
+  (let ((file (buffer-file-name)))
+    (unless (git-repo-p) (error "git 管理下ではありません"))
+    (let ((dir (concat (find-file-upward ".git") "/../"))
+          (buf "*git-blame-pr*"))
+      (with-temp-directory dir
+         (awhen (get-buffer buf)
+                (with-current-buffer it (erase-buffer)))
+         (call-process-shell-command (concat "git-blame-pr " file) nil buf t))
+      (switch-to-buffer buf)
+      (goto-char (point-min)))))
+
 (defun my-git-checkout-this-file ()
   (interactive)
   (let ((file (buffer-file-name)))
@@ -142,6 +155,7 @@
   (let ((word (or (thing-at-point 'word) "")))
     (unless (git-repo-p) (error "git 管理下にありません"))
     (call-process-shell-command (concat "git openpr " word))))
+
 (defalias 'gpr 'my-git-show-pr-this-word)
 
 (defun my-git-cat-this-word ()
@@ -185,3 +199,35 @@
 (defalias 'glogs-this-file 'my-git-log-S-this-file)
 (defalias 'gshow 'my-git-show-this-word)
 ;; (defalias 'rt  'my-rake-spec)
+
+
+;; http://handlename.hatenablog.jp/entry/2013/05/17/191259
+
+(defun my:chomp (str)
+  (replace-regexp-in-string "[\n\r]+$" "" str))
+
+(defun my:git-project-p ()
+  (string=
+   (my:chomp
+    (shell-command-to-string "git rev-parse --is-inside-work-tree"))
+   "true"))
+
+(defun my:tig-blame-current-file ()
+  (interactive)
+  (if (git-project-p)
+        (progn
+          (shell-command
+           (format "tmux new-window 'cd %s; tig blame -- %s'"
+                   (file-name-directory buffer-file-name)
+                   (file-name-nondirectory buffer-file-name)))
+          (shell-command (format "open -a iTerm")))))
+
+(defun chomp (str)
+  (replace-regexp-in-string "[\n\r]+$" "" str))
+(defun git-project-p ()
+  (string=
+   (chomp
+    (shell-command-to-string "git rev-parse --is-inside-work-tree"))
+   "true"))
+
+(global-set-key (kbd "C-c o b") 'my:tig-blame-current-file)

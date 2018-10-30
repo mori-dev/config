@@ -1,7 +1,5 @@
 
 
-
-
 ;; Warning: `mapcar' called for effect; use `mapc' or `dolist' instead を防ぐ
 (setq byte-compile-warnings '(free-vars unresolved
                               callargs redefine
@@ -58,8 +56,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (tango-dark)))
- ;; '(js2-bounce-indent-p nil t)
  '(migemo-isearch-enable-p nil)
+ '(package-selected-packages
+   (quote
+    (yaml-mode wgrep-helm wgrep-ack undohist sudo-ext smartrep smartparens simple-httpd session scss-mode scala-mode2 sass-mode ruby-compilation ruby-block rspec-mode rhtml-mode rfringe rbenv quickrun python-mode prettier-js pos-tip popwin point-undo php-mode pandoc-mode open-junk-file nginx-mode mustang-theme mustache-mode multiple-cursors markdown-mode magit let-alist key-chord jump js2-mode js-doc init-loader indent-guide highlight-cl highlight hide-lines helm-descbinds helm-c-moccur helm haskell-mode handlebars-mode gtags grep-a-lot google-c-style go-eldoc go-direx go-autocomplete git-timemachine git-gutter-fringe flycheck exec-path-from-shell electric-case dockerfile-mode dired-single dired+ dayone csv-mode css-mode css-eldoc color-theme-railscasts color-moccur apache-mode anzu alect-themes)))
  '(php-doc-author (format "your name <%s>" php-doc-mail-address))
  '(php-doc-license "The MIT License" t)
  '(php-doc-mail-address "your email address" t)
@@ -265,3 +265,14 @@ wdired
 ;;         (expand-file-name file-name)
 ;;       (unless (string= "/" (directory-file-name default-directory))
 ;;         (find-file-upward file-name (expand-file-name ".." default-directory))))))
+
+;; ubuntu 用
+(when (not (equal system-type 'darwin))
+  (setq x-select-enable-clipboard t)
+  (set-fontset-font t
+                    'japanese-jisx0208
+                    (font-spec :family "Noto Sans Mono CJK JP" :size 28)))
+; ずれ確認用
+; 0101010101010101010101010101010101010101
+; ｱｲｳｴｵｱｲｳｴｵｱｲｳｴｵｱｲｳｴｵｱｲｳｴｵｱｲｳｴｵｱｲｳｴｵｱｲｳｴｵ
+; あいうえおあいうえおあいうえおあいうえおあいうえお
