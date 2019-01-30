@@ -1,4 +1,8 @@
 
+;;; *.~ とかのバックアップファイルを作らない
+(setq make-backup-files nil)
+;;; .#* とかのバックアップファイルを作らない
+(setq auto-save-default nil)
 
 ;; Warning: `mapcar' called for effect; use `mapc' or `dolist' instead を防ぐ
 (setq byte-compile-warnings '(free-vars unresolved
@@ -59,7 +63,7 @@
  '(migemo-isearch-enable-p nil)
  '(package-selected-packages
    (quote
-    (yaml-mode undohist sudo-ext session scss-mode sass-mode ruby-compilation ruby-block rspec-mode rhtml-mode rfringe python-mode prettier-js pos-tip popwin point-undo php-mode pandoc-mode nginx-mode mustache-mode markdown-mode magit let-alist key-chord jump js2-mode init-loader indent-guide highlight-cl highlight hide-lines helm-descbinds helm-c-moccur helm haskell-mode handlebars-mode grep-a-lot go-eldoc go-autocomplete git-timemachine git-gutter-fringe flycheck exec-path-from-shell electric-case dockerfile-mode dired-single dired+ csv-mode css-mode css-eldoc color-moccur anzu)))
+    (typescript-mode yaml-mode undohist sudo-ext session scss-mode sass-mode ruby-compilation ruby-block rspec-mode rhtml-mode rfringe python-mode prettier-js pos-tip popwin point-undo php-mode pandoc-mode nginx-mode mustache-mode markdown-mode magit let-alist key-chord jump js2-mode init-loader indent-guide highlight-cl highlight hide-lines helm-descbinds helm-c-moccur helm haskell-mode handlebars-mode grep-a-lot go-eldoc go-autocomplete git-timemachine git-gutter-fringe flycheck exec-path-from-shell electric-case dockerfile-mode dired-single dired+ csv-mode css-mode css-eldoc color-moccur anzu)))
  '(php-doc-author (format "your name <%s>" php-doc-mail-address))
  '(php-doc-license "The MIT License" t)
  '(php-doc-mail-address "your email address" t)

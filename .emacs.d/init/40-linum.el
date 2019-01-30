@@ -1,6 +1,5 @@
 ;; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
 
-
 ;; 現在行の行番号を目立たせる
 ;; (require 'hlinum)
 
@@ -30,7 +29,8 @@
 (setq my-linum-file-extension
       '("conf" "bat" "rhtml" "erb" "rst"
         "txt" "hs" "md" "mkd" "markdown"
-        "haml" "ejs" "ts" "go" "js" "jsx"))
+        "haml" "ejs" "ts" "go" "js" "jsx"
+        "ts" "tsx"))
 
 ;; メージャーモード/マイナーモードでの指定
 (defvar my-linum-hook-name nil)
