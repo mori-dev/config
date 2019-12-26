@@ -1,15 +1,14 @@
-;; -*- emacs-lisp -*- <18/12/25 11:19:31 /home/mori/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <19/06/26 17:08:47 /home/mori/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
 ((["sudo" "root" "mori-x1-carbon-6th" nil nil]
-  ("uname" "Linux 4.15.0-42-generic")
+  ("uname" "Linux 4.15.0-47-generic")
   ("locale" "LC_ALL=en_US.utf8")
   ("test" "test")
   ("remote-path"
    ("/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
   ("remote-shell" "/bin/sh")
-  ("file-exists" "test -e")
   ("stat" nil)
   ("perl-file-spec" t)
   ("perl-cwd-realpath" t)
@@ -17,10 +16,10 @@
   ("id" "/usr/bin/id")
   ("gid-string" "root")
   ("gid-integer" 0)
+  ("file-exists" "test -e")
   ("ls" "/bin/ls --color=never")
   ("ls-dired" t)
   ("readlink" "\\readlink")
   ("uid-integer" 0)
   ("git" "\\git")
-  ("env-u-option" t)
-  ("~root" "/root")))
+  ("env-u-option" t)))

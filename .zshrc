@@ -22,7 +22,7 @@ export SVN_EDITOR=/usr/bin/emacs
 export EDITOR=/usr/bin/emacs
 export VISUAL="emacsclient -a emacs"
 
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+# export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -300,3 +300,9 @@ function peco-hub () {
 zle -N peco-hub
 
 alias ghqhub='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+
+xmodmap ~/.Xmodmap
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+eval "$(direnv hook zsh)"
