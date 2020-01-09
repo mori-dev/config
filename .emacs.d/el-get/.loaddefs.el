@@ -3,8 +3,7 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (23494 52709
-;;;;;;  818898 967000))
+;;;### (autoloads nil "el-get/el-get" "el-get/el-get.el" (0 0 0 0))
 ;;; Generated autoloads from el-get/el-get.el
 
 (autoload 'el-get-version "el-get/el-get" "\
@@ -101,10 +100,12 @@ already installed packages is considered.
 
 \(fn &optional SYNC &rest PACKAGES)" nil nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "el-get/el-get" '("el-get-")))
+
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-bundle" "el-get/el-get-bundle.el"
-;;;;;;  (23494 52709 818898 967000))
+;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from el-get/el-get-bundle.el
 
 (autoload 'el-get-bundle-el-get "el-get/el-get-bundle" "\
@@ -151,16 +152,20 @@ required.
 
 (function-put 'el-get-bundle! 'lisp-indent-function 'defun)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "el-get/el-get-bundle" '("el-get-bundle-")))
+
 ;;;***
 
 ;;;### (autoloads nil "el-get/el-get-list-packages" "el-get/el-get-list-packages.el"
-;;;;;;  (23494 52709 818898 967000))
+;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from el-get/el-get-list-packages.el
 
 (autoload 'el-get-list-packages "el-get/el-get-list-packages" "\
 Display a list of packages.
 
 \(fn)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "el-get/el-get-list-packages" '("el-get-")))
 
 ;;;***
 
