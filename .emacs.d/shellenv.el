@@ -1,1 +1,1 @@
-(setenv "PATH" "/Users/mori/.nodebrew/current/bin:/Users/mori/bin:/Users/mori/Dropbox/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/mori/.rbenv/shims:/Users/mori/.rbenv/bin:/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_10:/Applications/Emacs.app/Contents/MacOS/libexec-x86_64-10_10:/Users/mori/bin:/Users/mori/perl5/bin:/usr/local/bin:/Users/mori/bin/google_appengine")
+(setenv "PATH" "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_10:/Applications/Emacs.app/Contents/MacOS/libexec-x86_64-10_10")

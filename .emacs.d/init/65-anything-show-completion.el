@@ -1,6 +1,0 @@
-
-(require 'anything-show-completion)
-
-
-
-

@@ -1,10 +1,10 @@
 ;; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
 
 ;; anything 関連は init-anything.el で定義している
-
+(require 'cl)
 (require 'key-chord)
-;(setq key-chord-two-keys-delay 0.04)
-(setq key-chord-two-keys-delay 0.1)
+(setq key-chord-two-keys-delay 0.04)
+;; (setq key-chord-two-keys-delay 0.1)
 (key-chord-mode 1)
 ;; (key-chord-define-global "i9" 'shk-tabbar-next)
 ;; (key-chord-define-global "u8" 'shk-tabbar-prev)
@@ -128,11 +128,12 @@
 ;(key-chord-define-global "3e" 'my-fullscreen)
 
 
+(setq lpho-ignore-list  '( "*ansi-term*" "*anything*" "*anything action*" " *Minibuf-0*" " *Minibuf-1*" "*Messages*" "*Moccur*" "*php-completion document*" "*Help*" "TAGS"))
 (defun lpho-switch-to-previous-buffer ()
   "直前のバッファと行き来する"
   (interactive)
   (condition-case err
-      (labels
+      (cl-labels
           ((_lpho-switch-to-previous-buffer (target)
             (if (null (member (buffer-name (cadr target))
                               lpho-ignore-list))

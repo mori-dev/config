@@ -1,17 +1,17 @@
-;; (require 'cl)
+(require 'cl)
 
-;; (defmacro* with-temp-directory (dir &body body)
-;;   `(with-temp-buffer
-;;      (cd ,dir)
-;;      ,@body))
+(defmacro* with-temp-directory (dir &body body)
+  `(with-temp-buffer
+     (cd ,dir)
+     ,@body))
 
-;; (defmacro aif (test-form then-form &optional else-form)
-;;   `(let ((it ,test-form))
-;;      (if it ,then-form ,else-form)))
+(defmacro aif (test-form then-form &optional else-form)
+  `(let ((it ,test-form))
+     (if it ,then-form ,else-form)))
 
-;; (defmacro* awhen (test-form &body body)
-;;   `(aif ,test-form
-;;         (progn ,@body)))
+(defmacro* awhen (test-form &body body)
+  `(aif ,test-form
+        (progn ,@body)))
 
 (defun find-file-upward (file-name &optional dir)
   (interactive)
@@ -214,7 +214,7 @@
 
 (defun my:tig-blame-current-file ()
   (interactive)
-  (if (git-project-p)
+  (if (my:git-project-p)
         (progn
           (shell-command
            (format "tmux new-window 'cd %s; tig blame -- %s'"
@@ -224,10 +224,32 @@
 
 (defun chomp (str)
   (replace-regexp-in-string "[\n\r]+$" "" str))
-(defun git-project-p ()
-  (string=
-   (chomp
-    (shell-command-to-string "git rev-parse --is-inside-work-tree"))
-   "true"))
 
 (global-set-key (kbd "C-c o b") 'my:tig-blame-current-file)
+
+
+;; (defun git-project-p ()
+;;   (string=
+;;    (chomp
+;;     (shell-command-to-string "git rev-parse --is-inside-work-tree"))
+;;    "true"))
+
+(defun my:git-project-p ()
+  (string=
+    (shell-command-to-string "git rev-parse --is-inside-work-tree")
+   "true\n"))
+
+(defun open-github-from-current ()
+  (interactive)
+  (cond ((and (my:git-project-p) (use-region-p))
+         (shell-command
+          (format "~/Dropbox/bin/open-github-from-file %s %d %d"
+                  (file-name-nondirectory (buffer-file-name))
+                  (line-number-at-pos (region-beginning))
+                  (line-number-at-pos (region-end)))))
+        ((git-project-p)
+         (shell-command
+          (format "~/Dropbox/bin/open-github-from-file %s %d"
+                  (file-name-nondirectory (buffer-file-name))
+                  (line-number-at-pos))))))
+(defalias 'github-open-from-current 'open-github-from-current)

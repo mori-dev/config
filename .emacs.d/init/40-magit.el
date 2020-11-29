@@ -1,3 +1,7 @@
+
+;; TODO
+;; pr https://github.com/sigma/magit-gh-pulls
+
 (require 'magit)
 
 (defalias 'mst 'magit-status)

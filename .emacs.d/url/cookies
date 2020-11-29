@@ -2,12 +2,15 @@
 ;; Automatically generated file!!! DO NOT EDIT!!!
 
 (setq url-cookie-storage
- '(("marmalade-repo.org"
-  [url-cookie "connect.sid" "wfX9KM1CKnNTFeDHqLva55Br.jA3qL%2BiW865NUlmqevW%2FCyft3HXPBIow6Q7N0goMDyI" "Wed, 01 Jan 2014 19:59:05 GMT" "/" "marmalade-repo.org" nil]
-  [url-cookie "httpOnly" nil "Wed, 01 Jan 2014 19:59:05 GMT" "/" "marmalade-repo.org" nil]))
+ '((".google.com"
+  [url-cookie "CGIC" "IgMqLyo" "Tue, 26-Jan-2021 08:59:49 GMT" "/complete/search" ".google.com" nil]
+  [url-cookie "CGIC" "IgMqLyo" "Tue, 26-Jan-2021 08:59:49 GMT" "/search" ".google.com" nil]
+  [url-cookie "NID" "204=Y-Ac_JEPotkDKHW_JXgGT2_6kG9UWZBlRjdBU0yywZ-rPqAz5LJYmPrf96mUFYIVsmIiz5BTigvhqFw-BlzVCcT6uiqj8TmN-BP-3Znj4CCPLglGAP_2CAcyWIvO7S26hZU_ftbF9y9CIYH0amHuMiDPDFw0T6o_jPfHwu6yaRw" "Fri, 29-Jan-2021 09:01:52 GMT" "/" ".google.com" nil]))
 )
 (setq url-cookie-secure-storage
- 'nil)
+ '((".google.com"
+  [url-cookie "1P_JAR" "2020-07-30-09" "Sat, 29-Aug-2020 09:02:01 GMT" "/" ".google.com" t]))
+)
 
 ;; Local Variables:
 ;; version-control: never

@@ -1,86 +1,102 @@
-mkdir processes
-cd ..
-mkdir progresses
-cd ..
-mkdir ramp_coordinations
-mkdir api
-mkdir api
-mkdir issue_comments
-mkdir nokogiri
-cp fids_sample.xml fids_sample2.xml
-mkdir common
-mkdir common
-mkdir mobile
-u
-mkdir mobile
-mkdir board_topics
-mkdir flights
-mkdir memos
-mkdir list
-cd ..
-rm -rf aspell
+cd 
+cd develop/settlenetio-v2-traderApp
+monor
+s
 ls
-touch common/.gitkeep
-mkdir list
-tree .
-│   └── side
+pwd
+yarn workspace @settlenetio/traderapp test
 ls
-mkdir flights
-cp flight_list_item.hbs ./flights/
-cd ../../
-cd ../
-mkdir favorite_airport_codes
-mkdir errors
-mkdir errors
-mkdir profiles
-mkdir features
-mkdir board_topics
-mkdir board_comments
-mkdir board_comments
-mkdir images
-cp /home/m/Pictures/shutter/sample.png ./
-cp /home/m/Pictures/sample.png ./
-ls
-mkdir my
-mkdir filter
-mkdir view
-ls
-mv view views
-mkdir views
-ls
-mv chat messages
-ls
-rm -rf chat
-ls
-cd ..
-cd ..
-rm -rf migemo
-ls
-cd ..
-rm -rf bin
-cd ..
-rm -rf expand-region
-cd ..
-rm -rf emacs-dayone.bk
-ls
-rm -rf cucumber
-rm dispicon.el
-rm -rf gca-20060903
-rm ghc-mod
-rm -rf ghc-mod
-ls
+mkdir __test__
 cd ..
 ls
+cp -rf balance counterParties
+cp -rf balance takerChatRooms
+cp -rf balance makerChatRooms
+cp -rf balance tradeHisotries
+ls
+rm -rf counterParties
+cp -rf balance counterParties
+rm -rf counterParties
+cp -rf balance counterParties
+rm -rf counterParties
+cp -rf balance counterParties
+cp -rf balance counterParties
+cd ..
+cp -rf balance counterParties
+rm -rf counterParties
+cp -rf balance counterParties
+ls
+ls
+rm -rf takerChatRooms
+cp -rf makerChatRooms takerChatRooms
+address  auth  balance  counterParties  devWallet  global  ledger  makerChatRooms  router  takerChatRooms  tradeHisotries
+cp -rf balance timeline
+ls
+cp -rf balance chatRoomNotifications
+cd ../infrastructure/
+cd ..
+cd ..
+cd renderer/states/modules/
+cp -rf balance connection
+cd connection/
+ls
+ls
+pwd 
 cd ..
 ls
-cd .
-cd ..
-rm -rf lib
-cd ..
-rm -rf info
+cp -rf ~/develop/settlenetio-v2-traderApp.0804/packages/traderapp/src/renderer/states/modules/chatRoomNotifications ../
 ls
-mkdir common
+cp -rf ~/develop/settlenetio-v2-traderApp.0804/packages/traderapp/src/renderer/states/modules/chatRoomNotifications ./
 ls
-mkdir services
-tree .
-mkdir app
+cp -rf ~/develop/settlenetio-v2-traderApp.0804/packages/traderapp/src/renderer/states/modules/tradeHisotries/ ./
+ls
+cp -rf ~/develop/settlenetio-v2-traderApp.0804/packages/traderapp/src/renderer/states/modules/makerChatRooms ./
+cp -rf ~/develop/settlenetio-v2-traderApp.0804/packages/traderapp/src/renderer/states/modules/counterParties ./
+ls
+cp -rf ~/develop/settlenetio-v2-traderApp.0804/packages/traderapp/src/renderer/states/modules/takerChatRooms ./
+ls
+cp -rf ~/develop/settlenetio-v2-traderApp.0804/packages/traderapp/src/renderer/states/modules/connection ./
+ls
+ls
+rm -rf chatRoomNotifications connection counterParties makerChatRooms takerChatRooms tradeHisotries
+ls
+cp -rf ~/develop/settlenetio-v2-traderApp.0805/packages/traderapp/src/renderer/states/modules/connection ./
+ls
+cp -rf ~/develop/settlenetio-v2-traderApp.0805/packages/traderapp/src/renderer/states/modules/takerChatRooms ./
+cp -rf ~/develop/settlenetio-v2-traderApp.0805/packages/traderapp/src/renderer/states/modules/makerChatRooms ./
+cp -rf ~/develop/settlenetio-v2-traderApp.0805/packages/traderapp/src/renderer/states/modules/tradeHisotries ./
+cp -rf ~/develop/settlenetio-v2-traderApp.0805/packages/traderapp/src/renderer/states/modules/counterParties ./
+ls
+cp -rf ~/develop/settlenetio-v2-traderApp.0805/packages/traderapp/src/renderer/states/modules/chatRoomNotifications ./
+ls
+cp /Users/kazuhiko-mori/develop/settlenetio-v2-traderApp.0805/packages/traderapp/src/shared/testutils/models/ ../../../shared/testutils/models/
+cd states/modules/
+ls
+mv chatRoomNotifications chatroom-notifications
+mvcounterParties counter-parties
+mv counterParties counter-parties
+mv devWallet dev-wallet
+mv makerChatRooms maker-chatrooms
+mv takerChatRooms taker-chat-rooms
+mv taker-chat-rooms taker-chatrooms
+mv tradeHisotries trade-hisotries
+cd ..
+ls
+mv chatroom-notifications chat-room-notifications
+mv maker-chatrooms maker-chat-rooms
+mv taker-chatrooms taker-chat-rooms
+cd ..
+ls
+rm -rf taker-chat-room
+cd /Users/kazuhiko-mori/develop/settlenetio-v2-traderApp/packages/traderapp/src/renderer/states/modules/
+ls
+cp -rf chat-room-notifications notifications
+auth     chat-room-notifications  counter-parties  current-rfq    global      maker-chat-rooms  taker-chat-rooms  
+ls
+rm -rf notifications
+ls
+cp -rf balance maker-signs
+rm -rf maker-signs/
+cp -rf balance signs
+ls
+cp -rf chat-room-notifications notifications

@@ -1,7 +1,7 @@
 ;;; grep-edit --- edit grep buffer and apply the changes to files
 ;; -*- Mode: Emacs-Lisp -*-
 
-;;  $Id: grep-edit.el,v 2.11 2009-10-20 12:12:55 akihisa Exp $
+;;  $Id: grep-edit.el,v 2.9 2009/01/06 08:26:27 akihisa Exp $
 
 ;; Author: Matsushita Akihisa <akihisa@mail.ne.jp>
 ;; Keywords: grep edit
@@ -37,21 +37,13 @@
 ;; The latest version of this program can be downloaded from
 ;; http://www.bookshelf.jp/elc/grep-edit.el
 
-;; related my elisp
-;; http://www.bookshelf.jp/elc/color-grep.el
-;; http://www.bookshelf.jp/elc/color-moccur.el
-;; http://www.bookshelf.jp/elc/moccur-edit.el
-
 ;; Usage:
-;; You can edit the text on *grep* buffer, and the changed text is
-;; highlighted. Then, type C-c C-e to apply the highlighting changes
-;; to files.
-
+;; You can start editing the text on *grep* buffer. And the changed
+;; text is highlighted
 ;; C-c C-e : apply the highlighting changes to files.
-;; C-c C-u : All changes are ignored
+;; C-c C-u : abort
 ;; C-c C-r : Remove the highlight in the region (The Changes doesn't
-;; apply to files. Of course, if you type C-c C-e, the remained
-;; highlight changes are applied to files.)
+;; apply to files)
 
 ;;; History:
 
@@ -156,7 +148,7 @@
           (buffer-name (current-buffer)))
          (string= process-status "exit"))
         (progn
-          (toggle-read-only)
+          (read-only-mode)
           (buffer-enable-undo (current-buffer))
           (grep-edit-set-readonly-area t)
           (setq grep-edit-change-face-flg t)))))
@@ -226,7 +218,7 @@
                 (match-end 1))
                default-directory))
         (setq grep-edit-line
-              (string-to-int
+              (string-to-number
                (buffer-substring-no-properties
                 (match-beginning 2)
                 (match-end 2))))
@@ -343,7 +335,7 @@ commands.  This advice only has effect in grep-edit mode."
       ,(format "Make %s to work better with grep-edit,\n%s."  command
                "skipping read-only matches when invoked without argument")
       ad-do-it
-      (if (eq major-mode 'grep-mode)
+      (if (eq major-mode 'compilation-mode)
           (while (and ad-return-value
                       (text-property-any
                        (max 1 (1- (match-beginning 0))) (match-end 0)
@@ -359,7 +351,7 @@ commands.  This advice only has effect in grep-edit mode."
    `(defadvice ,command (around grep-edit-grok-read-only activate)
       ,(format "Make %s to work better with grep-edit,\n%s."  command
                "skipping read-only matches when invoked without argument")
-      (if (eq major-mode 'grep-mode)
+      (if (eq major-mode 'compilation-mode)
           (progn
             (grep-edit-add-skip-in-replace 'search-forward)
             (grep-edit-add-skip-in-replace 're-search-forward)

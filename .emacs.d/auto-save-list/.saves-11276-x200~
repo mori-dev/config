@@ -1,8 +1,0 @@
-/etc/apache2/sites-available/my_site
-/etc/apache2/sites-available/#my_site#
-/etc/hosts
-/etc/#hosts#
-/opt/dummy/a.txt
-/opt/dummy/#a.txt#
-/opt/phpmyadmin/index.php
-/opt/phpmyadmin/#index.php#
